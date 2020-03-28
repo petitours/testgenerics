@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+  <% if (xhr=== true && torefresh === true) {%>
+    <meta http-equiv="refresh" content="5;URL=/" >
+  <% } %>
+
+    <main>
+
+      <% if (errors !== "") {%>
+      <div class="alert alert-danger" role="alert"> <%= errors %></div>
+      <% } %>
+
+      <div class="text-center">
+        <img src="/assets/img/404.jpg"  alt="erreur 404">
+        <h1>Erreur 404 : not found</h1>
+        <div>La page recherchée n'existe pas (ou a été supprimée) !</div>  
+        </br>
+        <div class="alert alert-info" role="alert">
+          Tentative de rafraichissement automatique dans : <em id="refresh-delay">5</em> s <a href="/" class="alert-link redirect">Cliquer pour revenir à l'acceuil maintenant.</a>.
+        </div>
+        
+      </div>
+
+                                   
+    </main>
+
+<%- include('../partials/footer.ejs') %>

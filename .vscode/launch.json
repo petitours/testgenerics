@@ -1,0 +1,12 @@
+{
+"configurations": [
+    {
+        "type": "node",
+        "name": "debug",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "program": "${workspaceFolder}/index.js",
+        "runtimeArgs": ["-r", "esm"]
+    }
+]    
+}

@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs') %>
+
+<% if (xhr=== true && torefresh === true) {%>
+  <meta http-equiv="refresh" content="5;URL=/" >
+<% } %>
+
+<main>
+          <% Object.entries(errors).forEach(([name, value]) => { %>
+            <div class="alert alert-danger" role="alert"><%= name %> : <%= value.message%></div>
+          <% }) %>
+    
+          <div class="text-center">
+            <img src="/assets/img/500.png"  alt="erreur 500">
+            <h1>Erreur 500 : internal server error</h1>
+            <div>Une erreur est apparue !</div>  
+            </br>
+            <div class="alert alert-info" role="alert">
+              Tentative de rafraichissement automatique dans : <em id="refresh-delay">5</em> s <a href="/" class="alert-link redirect">Cliquer pour revenir à l'acceuil maintenant.</a>.
+            </div>
+          </div>
+    
+                                       
+</main>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,12 @@
+SET time_zone = '+0:00';
+
+
+SHOW SESSION VARIABLES LIKE 'time_zone'; //SYSTEM par defaut
+
+
+// pour récupérer le timezone du client
+
+const data = new FormData()
+
+data.append('offset', new Date().getTimezoneOffset())
+navigator.sendBeacon('/timezone', data)

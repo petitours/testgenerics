@@ -1,0 +1,32 @@
+
+
+
+
+
+
+## la racine du projet 
+
+
+knex init     -> creation du fichier knexfile.js à la racine
+
+
+knex migrate:make NomFichier -> creation d'une fichier qu'il ne faut pas renommer (il est dans le dossier migrations)!!
+
+
+
+update the database matching your NODE_ENV by running:
+
+$ knex migrate:latest
+
+You can also pass the --env flag or set NODE_ENV to select an alternative environment:
+
+$ knex migrate:latest --env production
+
+
+
+
+
+
+
+
+

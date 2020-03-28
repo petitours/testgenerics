@@ -1,0 +1,31 @@
+:root {
+  --css-ui--bg: rgba(255, 255, 255, 0.99);
+  --css-ui--font: OpenSans, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  --css-ui--padding: .5em;
+  --css-ui--contents-width: 99%;
+  --css-ui--header-bg: #1E73BE;
+  --css-ui--header-height: 3em;
+  --css-ui--header--popdown-color: rgba(255, 255, 255, 1);
+  --css-ui--header--popdown-width: 15em;
+  --css-ui--header--popdown-counter-color: rgba(255, 255, 255, .8);
+  --css-ui--header--popdown-counter-bg: rgba(255, 0, 0, 1);
+  --css-ui--header--popdown-counter-font-size: .8em;
+  --css-ui--header--popdown-counter-padding: .3em;
+  --css-ui--header--popdown-item-bg: rgba(255, 255, 255, .7);
+  --css-ui--menu--bg: rgba(25, 35, 45, 1);
+  --css-ui--menu--border: .063em solid rgba(255, 255, 255, .3);
+  --css-ui--menu--color: rgba(255, 255, 255, 1);
+  --css-ui--menu--icon-font: FontAwesome5Free;
+  --css-ui--menu--icon-size: 3em;
+  --css-ui--menu--height: 100%;
+  --css-ui--menu--overlay-bg: rgba(0, 0, 0, .3);
+  --css-ui--menu--width: 15em;
+  --theme--anchor-color: #1E73BE;
+  --theme--anchor-hover-color: #87AC12;
+  --theme--contents-item-bg: rgba(255, 255, 255, .7);
+  --theme--contents-item-color: rgba(0, 0, 0, .8);
+  --theme--contents-title-bg: rgba(166, 38, 57, 1);
+  --theme--contents-title-color: rgba(255, 255, 255, 1);
+  --theme--menu-current-color: rgba(166, 38, 57, 1);
+  --theme--title-color: rgba(255, 255, 255, 1);
+}

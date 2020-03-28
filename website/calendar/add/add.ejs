@@ -1,0 +1,28 @@
+
+<section class="lightbox">
+    <div class="modal-lightbox">
+        
+        <span class="Anticore-close-lb close-cursor cursor" >&times;</span>
+        <div class="modal-lightbox-content lb_add">
+            <h1>Add an event</h1>
+            <form action="/calendar/add" enctype="multipart/form-data" method="post">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="content">Description de l'évènement</label>
+                        <input name="content" id="content" type="text" class="form-control"  minlength="3" maxlength="250" placeholder="Ceci est un évènement" required>
+                    </div>
+                    <div class="form-group ">
+                        <label for="periode">Période</label>
+                        <input name="periode" id="periode" class="form-control dtpkrPlage" type="text"  placeholder="Sélectionner date" required>
+
+                    </div>
+                    
+                </fieldset>
+                <button class="btn btn-outline-secondary">Enregistrer</button>
+            </form>
+
+        </div>
+    </div>
+    
+</section>
+

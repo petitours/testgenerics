@@ -1,0 +1,88 @@
+  <%- include('../../partials/header.ejs') %>
+
+    <main class="calendar">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><h1><%= title %></h1></li>
+        </ol>
+      </nav>      
+ 
+        <!--form action="..." method="post" enctype="multipart/form-data">
+          <fieldset>
+            <p><label>Date centrale <input name="centralDate" max="" min="" step="" type="date" value="2020-05-02"></label></p>
+            <p><label>Nombre de jours <input name="plage" max="" min="" step=1 type="number" value=12></label></p>
+          </fieldset>
+          <button>Submit</button>
+        </form-->
+
+        <!--div class="btn-toolbar" role="toolbar" aria-label="Manipulation du timeline">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a role="button" href="<%= hrefBtDay %>" class="<%= ClassBtDay %>" title="Echelle de temps sur 1 jour complet">Jour</a>
+            <a role="button" href="<%= hrefBtWeek %>" class="<%= ClassBtWeek %>" title="Echelle de temps sur 1 semaine complète">Semaine</a>
+            <a role="button" href="<%= hrefBtMonth %>" class="<%= ClassBtMonth %>" title="Echelle de temps sur 1 mois complet">Mois</a>
+            <a role="button" href="<%= hrefBtYear %>" class="<%= ClassBtYear %>" title="Echelle de temps sur 1 année complète">Année</a>
+          </div>
+          <div class="btn-group mr-2" role="group" aria-label="Second group">
+            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un écran vers le passé">⇐ 1</a>
+            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un demi écran vers le passé">← 0.5</a>
+            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Positionne le timeline sur maintenant">Maintenant</a>
+            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un demi écran vers le futur">0.5 →</a>
+            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un écran vers le futur">1 ⇒</a>
+          </div-->
+          <div class="btn-group" role="group" aria-label="Third group">
+            <a role="button" href="/calendar/add" class="btn btn-outline-secondary" title="Création d'un nouvel évènement">Créer</a>
+          </div>
+        </div>
+        
+        <div id="timelineici"></div>
+
+        <a href="/simuerreur" >declencher erreur</a> </br>
+        <a href="/calendar/edit/46546846654" >editer un evenement qui n'existe pas</a></br>
+        <a href="/calendar/del/46546846654" >effacer un evenement qui n'existe pas</a></br>
+        <a href="/calendar?plage=year&date=now" >ca2lendar?plage=year&date=now</a> </br>
+        <a href="/calendar?plage=month&date=now" >calendar?plage=month&date=now</a></br>
+        <a href="/calendar?plage=week&date=now" >calendar?plage=week&date=now</a></br>
+        <a href="/calendar?plage=day&date=now" >calendar?plage=day&date=now</a></br>
+        <a href="/calendar?plage=400&date=now" >calendar?plage=400&date=now</a></br>
+        <a href="/calendar?plage=day&date=2019-08-24" >calendar?plage=day&date=2019-08-24</a></br>
+
+        <div class="table-wrapper">
+          <% if (events.length > 0) {%>
+              <table class="table table-hovered">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th scope="col">id_evt</th>
+                          <th scope="col">Evènement</th>
+                          <th scope="col">Début</th>
+                          <th scope="col">Fin</th>
+                          <th scope="col">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% events.forEach((event, index) => { %>
+                          <tr itemscope itemtype="http://schema.org/Event">
+                              <th scope="row" itemprop="identifier"><%= event.id_evt %></th>
+                              <td itemprop="name"><%= event.content %></td>
+                              <td itemprop="startDate" content="<%= event.start.toISOString() %>"><%= event.start.toLocaleString() %></td>
+                              <td itemprop="endDate" content="<%= event.end.toISOString() %>"><%= event.end.toLocaleString() %></td>
+                              <td>
+                                  <a href="/calendar/edit/<%= event.id_evt %>" class="btn btn-sm btn-success fawe " title="Editer l'évènement"></a>
+                                  <a href="/calendar/del/<%= event.id_evt %>" class="btn btn-sm btn-danger fawe " title="Supprimer l'évènement"></a>
+                              </td>
+                          </tr>
+                      <% }) %>
+                  </tbody>
+              </table> 
+          <% } else { %>
+              <p class="text-center">Aucun évènement trouvé. Aller <a href="/calendar/add" >à cette page</a> pour ajouter un évènement.</p>
+          <% } %>
+      </div>
+
+    </main>
+
+
+    <!--script> var dataForTimeline2 = <%- dataForTimeline  %> ; </script-->   
+
+
+<%- include('../../partials/footer.ejs') %>

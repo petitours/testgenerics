@@ -1,0 +1,29 @@
+
+<section class="lightbox ">
+  <div class="modal-lightbox">
+      
+      <span class="Anticore-close-lb close-cursor cursor" >&times;</span>
+      <div class="modal-lightbox-content lb_edit">          
+          <h1>Édition évènement <%= event.id_evt %></h1>
+            <% if (event) { %>
+                <form action="/calendar/edit/<%= event.id_evt %>" enctype="multipart/form-data" method="post">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="content">Description de l'évènement</label>
+                        <input name="content" id="content" type="text" class="form-control"  minlength="3" maxlength="250" value="<%= event.content %>" required>
+                    </div>
+                    <div class="form-group ">
+                        <label for="periode">Période</label>
+                        <input name="periode" id="periode" class="form-control dtpkrPlage" type="text"  value="<%= event.start.toISOString()  %> au <%= event.end.toISOString() %>" required>
+                    </div>
+
+                </fieldset>
+                <button class="btn btn-outline-secondary">Enregistrer</button>
+                </form>
+            <% } else { %>
+                <p class="text-center">Evènement non trouvé.</p>
+            <% } %>
+      </div>
+  </div>
+  
+</section>

@@ -1,0 +1,6 @@
+
+
+
+<% Object.entries(errors).forEach(([name, value]) => { %>
+    <ins class="error" data-name="<%= name %>"><%= value.message%></ins>
+<% }) %>

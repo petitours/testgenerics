@@ -1,0 +1,56 @@
+<% if (xhr === false) {%>
+
+<!doctype html>
+<html lang="fr">
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" >
+        
+    <link rel="stylesheet" href="/flatpickr/dist/flatpickr.min.css">
+
+    <link rel="stylesheet" href="/assets/css/variables.css" media="screen"  />
+    <link rel="stylesheet" href="/css-ui/css-ui.min.css" media="screen"  />
+    <link rel="stylesheet" href="/css-ui/components/menu/mini/mini.min.css" media="screen"  />
+    <link rel="stylesheet" href="/css-ui/components/header/popdown/popdown.min.css" media="screen"  />
+    <link rel="stylesheet" href="/assets/css/style.css" media="screen"  />
+
+    <link href="/js/vis-timeline/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+
+    <title><%= title %></title>
+
+    <% if (torefresh === true) {%>
+      <meta http-equiv="refresh" content="5;URL=/" >
+    <% } %>
+
+  </head>
+  <body>
+    <header>
+      <a aria-label="Retour accueil" href="/"  ><h1><img alt="Mon site de la mort qui tue" src="img/logo.png" /></h1></a>    
+            <!--googleoff: all-->
+            <ol>
+              <li>
+                  <a aria-label="Logout" href="#logout" role="button" tabindex="99996"></a>
+              </li>
+              <li>
+                  <a aria-label="Open messages" href="javascript:" role="button" tabindex="99997"></a>
+                  <ol>
+                      <li><a href="#message-1">New message (1)</a></li>
+                      <li><a href="#message-2">New message (2)</a></li>
+                      <li><a href="#message-3">New message (3)</a></li>
+                      <li><a href="#message-4">New message (4)</a></li>
+                  </ol>
+                  <p>Nothing to show</p>
+                  <a aria-label="Close messages" href="javascript:" role="button" tabindex="-2"></a>
+              </li>
+              <li>
+                  <a aria-label="Open friends" href="javascript:" role="button" tabindex="99998"></a>
+                  <p>Nothing to show</p>
+                  <a aria-label="Close friends" href="javascript:" role="button" tabindex="-3"></a>
+              </li>
+          </ol>
+          <!--googleon: all-->
+    </header>
+
+<% } %>
