@@ -94,30 +94,6 @@ app.get('/calendar/del/:id',  attempt(GETdelCalendarHooks) );//avec ous sans con
 app.get('/simuerreur', attempt(GETsimuErrorHooks) );
 
 
-// Gestion des erreurs de parser de formulaire 
-/*app.use((err, request, response, next) => {
-  if (err && err.message==="validation errors") {
-    return response.render('errors/formRules.ejs', {
-      errors : err
-    });
-  }
-  next(err)
-})
-
-// Gestion des erreurs 422
-app.use((err, request, response, next) => {
-  if (err.code === 422) {
-    return response.status(422).render('errors/422.ejs', {
-      title: "Unprocessable entity"
-      ,erreur: err.message  + ':  ' + err.errors       
-      ,xhr : request.xhr 
-      ,torefresh : true
-    });
-  }
-  next(err)
-})
-*/
-
 // Gestion des erreurs 400
 app.use((err, request, response, next) => {
   console.log(err)
