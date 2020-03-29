@@ -1,9 +1,7 @@
 
 import qb from "../../../knex/qb.js";
-import { redirector } from "../../../futurModule/utils/express/hooks/redirector.js";
+import hooks from '../../../lib/express/hooks/hooks.js'
 import { calendarEventRules } from "../../../lib/rulesets/calendarEventRules.js";
-import { body } from "../../../futurModule/utils/express/hooks/parser.js";
-import { logger } from "../../../futurModule/utils/express/hooks/logger.js";
 
 function addEvent () {
     return async ({ context }) => {
@@ -26,9 +24,9 @@ function addEvent () {
 }
 
 export const POSTaddCalendarHooks = [
-  body(calendarEventRules),
-  logger(),
+  hooks.request.body(calendarEventRules),
+  hooks.log.logger(),
   addEvent(),
-  logger(),
-  redirector() // context.location
+  hooks.log.logger(),
+  hooks.response.redirector() // context.location
 ]

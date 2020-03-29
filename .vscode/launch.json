@@ -5,8 +5,8 @@
         "name": "debug",
         "request": "launch",
         "cwd": "${workspaceFolder}",
-        "program": "${workspaceFolder}/index.js",
-        "runtimeArgs": ["-r", "esm"]
+        "program": "${workspaceFolder}/index.js"/*,
+        "runtimeArgs": ["-r", "esm"]*/
     }
 ]    
 }

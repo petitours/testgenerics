@@ -1,7 +1,7 @@
-import { twoDateYear, twoDateMonth, twoDateWeek, twoDateFromCenter, twoDateDay } from "../../../dates/centerDate.js"
+import { twoDateYear, twoDateMonth, twoDateWeek, twoDateFromCenter, twoDateDay } from "../../dates/centerDate.js"
 
 
-// retourne une plage de date à partir de 'date' et d'une plage en jour ou valeurs standard
+// retourne une plage de datetime à partir de 'date' et d'une plage en jour ou valeurs standard
 export default function twoDatefromPlage () {
 
   return async (value,fields) => {

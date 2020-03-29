@@ -1,11 +1,7 @@
-import optionalISOdate from "../../../futurModule/validation/standardRules/optionalISOdate.js";
-import optional from "../../../futurModule/validation/basicRules/optional.js";
-import twoDatefromPlage from "../../../futurModule/validation/combinatedRules/twoDateFromPlage/twoDatefromPlage.js";
 import qb from "../../../knex/qb.js";
-import { logger } from "../../../futurModule/utils/express/hooks/logger.js";
 import { centerFromTwoDate } from "../../../futurModule/dates/centerDate.js";
-import { query } from "../../../futurModule/utils/express/hooks/parser.js";
-import eventsByPeriod from "../../../lib/hooks/calendar/eventsByPeriod.js";
+import hooks from "../../../lib/express/hooks/hooks.js";
+import parsers from "../../../lib/validation/parsers/parsers.js";
 
 // /calendar?plage=month&date=now       valeur par defaut en l'absence de parametre, affiche le mois en cours
 // /calendar?plage=year&date=now        affiche l'année en cours
@@ -22,14 +18,14 @@ import eventsByPeriod from "../../../lib/hooks/calendar/eventsByPeriod.js";
 
 const getCalendarRules = {
   
-    date : optionalISOdate( {
-        defaut: 'now',
-        min:'1900-01-01T00:00:00' ,
-        max :'2200-01-01T00:00:00',
+    date : parsers.validation.standardRules.optionalISOdate( {
+        coalesce: 'now',
+        min:'1900-01-01T00:00' ,
+        max :'2200-01-01T00:00',
     }),
     plage : [
-        optional({defaut : 'month'}),
-        twoDatefromPlage()
+        parsers.misc.coalesce({coalesce : 'month'}),
+        parsers.validation.combinatedRules.twoDatefromPlage()
     ]
 }
 
@@ -99,12 +95,10 @@ function htmlRenderer () {
   
   // Export des hooks a executer pour index.js
   export const GETcalendarHomeHooks = [
-    query(getCalendarRules),
-    //logger(),
-    eventsByPeriod ({ qb, table:'t_agenda_evt' }),
-    logger(),
-    //secureDates(),
-   //logger(),
+    hooks.request.query(getCalendarRules),
+    //hooks.log.logger(),
+    hooks.calendar.events.byPeriod({ qb, table:'t_agenda_evt' }),
+    hooks.log.logger(),
     htmlRenderer ()
   ]
   

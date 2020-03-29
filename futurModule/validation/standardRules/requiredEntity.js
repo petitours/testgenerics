@@ -1,16 +1,12 @@
-import required from "../basicRules/required";
-import number from "../basicRules/number/number";
-import integer from "../basicRules/number/integer";
-import positive from "../basicRules/number/positive";
-import toEntity from "../basicRules/bdd/toEntity.js";
-
+import parsers from "@lcf.vs/generics/lib/validation/parsers/parsers.js";
 
 export default function requiredEntity({qb, table, id}){
   return [
-    required(),  
-    number(),
-    integer(),
-    positive(),
-    toEntity({qb, table, id})
+    parsers.misc.required(),
+    parsers.number.type(),
+    parsers.number.min({ min: 0 }),
+    parsers.number.step({ min: 0, step: 1 }),
+    
+    parsers.knex.type({qb, table, id}) // vérifie que l'element existe en base et si oui on récupère l'objet (comme ca ferait pour uen date...)
    ]
 }

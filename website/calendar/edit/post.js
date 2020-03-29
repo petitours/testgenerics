@@ -1,9 +1,7 @@
 import { calendarEventRules } from "../../../lib/rulesets/calendarEventRules.js";
 import qb from "../../../knex/qb.js";
-import { params, body } from "../../../futurModule/utils/express/hooks/parser.js";
-import { redirector } from "../../../futurModule/utils/express/hooks/redirector.js";
-import { logger } from "../../../futurModule/utils/express/hooks/logger.js";
-import requiredID from "../../../futurModule/validation/standardRules/requiredID.js";
+import hooks from '../../../lib/express/hooks/hooks.js'
+import parsers from "../../../lib/validation/parsers/parsers.js";
 
 
 function editEvent () {
@@ -27,11 +25,11 @@ function editEvent () {
 }
 
 export const POSTeditCalendarHooks = [
-  params({id: requiredID() }),
-  logger(),
-  body(calendarEventRules),
-  //logger(),
+  hooks.request.params({id: parsers.validation.standardRules.requiredID() }),
+  //hooks.log.logger(),
+  hooks.request.body(calendarEventRules),
+  //hooks.log.logger(),
   editEvent(),
-  //logger(),
-  redirector() // context.location
+  //hooks.log.logger(),
+  hooks.response.redirector() // context.location
 ]

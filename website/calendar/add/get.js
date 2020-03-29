@@ -1,4 +1,4 @@
-import { logger } from "../../../futurModule/utils/express/hooks/logger.js";
+import hooks from '../../../lib/express/hooks/hooks.js'
 
 
 function htmlRenderer () {
@@ -16,6 +16,6 @@ function htmlRenderer () {
 
 // Export des hooks a executer pour index.js
 export const GETaddCalendarHooks = [
-  //logger(),
+  hooks.log.logger(),
   htmlRenderer ()
 ]

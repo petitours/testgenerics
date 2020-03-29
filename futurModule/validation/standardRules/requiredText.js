@@ -1,15 +1,12 @@
-import required from "../basicRules/required.js";
-import string from "../basicRules/string/string.js";
-import minString from "../basicRules/string/minString.js";
-import maxString from "../basicRules/string/maxString.js";
+import parsers from "@lcf.vs/generics/lib/validation/parsers/parsers.js";
 
 
-export default function requiredText({min,max}){
+export default function requiredText({minlength,maxlength}){
   return [
-      required(),
-      string(),       // retourne une string si valide
-      minString({min}),   
-      maxString({max})   
+      parsers.misc.required(),
+      parsers.string.type(),       // retourne une string si valide
+      parsers.string.minlength({minlength}),   
+      parsers.string.maxlength({maxlength})   
    ]
 }
 

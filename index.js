@@ -3,17 +3,16 @@ import express from 'express';
 import session from 'cookie-session'; 
 import helmet from 'helmet';
 import multer from 'multer';
-//import { bodyParser } from './futurModule/utils/express/hooks/bodyParser.js';
+import env from'./bootstrap.js'
 import { GETaddCalendarHooks } from './website/calendar/add/get.js';
 import { POSTaddCalendarHooks } from './website/calendar/add/post.js';
 import { GETsimuErrorHooks } from './website/simuErreur.js';
 import { GEThome } from './website/home/index/get.js';
 import { GETcalendarHomeHooks } from './website/calendar/index/get.js';
-import attempt from './futurModule/utils/express/attempt.js';
 import { GETeditCalendarHooks } from './website/calendar/edit/get.js';
 import { POSTeditCalendarHooks } from './website/calendar/edit/post.js';
-import env from'./bootstrap.js'
 import { GETdelCalendarHooks } from './website/calendar/del/get.js';
+import attempt from '@lcf.vs/generics/lib/express/attempt.js'
 
 const app = express();
 const port = 8080 ;

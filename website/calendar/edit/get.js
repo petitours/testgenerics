@@ -1,9 +1,15 @@
-import { logger } from "../../../futurModule/utils/express/hooks/logger.js";
-import qb from "../../../knex/qb.js";
-import { params } from "../../../futurModule/utils/express/hooks/parser.js";
-import requiredEntity from "../../../futurModule/validation/standardRules/requiredEntity.js";
-import { isEntity } from "../../../futurModule/utils/express/hooks/isEntity.js";
 
+import qb from "../../../knex/qb.js";
+import hooks from '../../../lib/express/hooks/hooks.js'
+import parsers from "../../../lib/validation/parsers/parsers.js";
+
+const getEditCalendarRules = {
+  id: parsers.validation.standardRules.requiredEntity({
+    qb,
+    table:'t_agenda_evt',
+    id:'id_evt'
+  }) 
+}
 
 function htmlRenderer () {
   return async ({ context,response,request,next }) => {
@@ -23,9 +29,9 @@ function htmlRenderer () {
 
 // Export des hooks a executer pour index.js
 export const GETeditCalendarHooks = [
-  params({id: requiredEntity({qb,table:'t_agenda_evt', id:'id_evt' }) }),
-  //logger(),
-  isEntity(), // test si l'evenement existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
-  //logger(),
+  hooks.request.params(getEditCalendarRules),
+  hooks.log.logger(),
+  hooks.knex.isEntity(),
+  //hooks.log.logger(),
   htmlRenderer ()
 ]

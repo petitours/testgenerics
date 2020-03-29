@@ -24,10 +24,10 @@ const config = {
       database : env.DB_DATABASE,
     },  
     migrations: {
-      directory: './knex/prod/migrations'
+      directory: './knex/dev/migrations'
     },
     seeds: {
-      directory: './knex/prod/seeds'
+      directory: './knex/dev/seeds'
     }
   }
 }

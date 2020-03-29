@@ -1,8 +1,10 @@
-import maxDatetime from "../../basicRules/datetime/maxDatetime.js"
+import parsers from "@lcf.vs/generics/lib/validation/parsers/parsers.js";
+
+
 
 export default function twoMaxDatetime ({max}) {
 
-  const test = maxDatetime({max}) //plus performance de créer le test avant le return (pas une fonction créée a chaque test)
+  const test = parsers.datetime.max({max}) //plus performance de créer le test avant le return (pas une fonction créée a chaque test)
   
   return async value => {
 

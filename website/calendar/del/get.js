@@ -1,18 +1,13 @@
-import { logger } from "../../../futurModule/utils/express/hooks/logger.js";
+
 import qb from "../../../knex/qb.js";
-import { query, params } from "../../../futurModule/utils/express/hooks/parser.js";
-import optional from "../../../futurModule/validation/basicRules/optional.js";
-import string from "../../../futurModule/validation/basicRules/string/string.js";
-import requiredEntity from "../../../futurModule/validation/standardRules/requiredEntity.js";
-import { isEntity } from "../../../futurModule/utils/express/hooks/isEntity.js";
-import archiveEntity from "../../../futurModule/utils/express/hooks/archiveEntity.js";
+import parsers from "../../../lib/validation/parsers/parsers.js";
+import hooks from '../../../lib/express/hooks/hooks.js'
 
 
-const getEventDelete = {
-  
+const getEventDelete = {  
   confirmation : [
-    optional({defaut : 'false'}),
-    string (),
+    parsers.misc.coalesce({coalesce : 'false'}),
+    parsers.string.type(),
    ] 
 }
 
@@ -66,13 +61,13 @@ function htmlRenderer () {
 
 // Export des hooks a executer pour index.js
 export const GETdelCalendarHooks = [
-  params({id: requiredEntity({qb,table:'t_agenda_evt', id:'id_evt' }) }), // vérifie que l'id correspond a un evenement
-  //logger(),
-  query(getEventDelete), // recupère la confirmation d'effacement
-  //logger(),
-  isEntity(), // test si l'evenement existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
-  archiveEntity ({qb,table:'t_agenda_evt', id:'id_evt' }), // marque 
+  hooks.request.params({id: parsers.validation.standardRules.requiredEntity({qb,table:'t_agenda_evt', id:'id_evt' }) }), // vérifie que l'id correspond a un evenement
+  //hooks.log.logger(),
+  hooks.request.query(getEventDelete), // recupère la confirmation d'effacement
+  //hooks.log.logger(),
+  hooks.knex.isEntity(), // test si l'evenement existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
+  hooks.knex.archiveEntity({qb,table:'t_agenda_evt', id:'id_evt' }), // marque 
   //getEvent (), // recupération de l'evenement à effacer
-  //logger(),
+  //hooks.log.logger(),
   htmlRenderer ()
 ]
