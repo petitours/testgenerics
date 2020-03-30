@@ -1,5 +1,0 @@
-https://expressjs.com/fr/advanced/best-practice-security.html
-
-https://expressjs.com/fr/advanced/best-practice-performance.html#d%C3%A9finir-node_env-sur-production
-
-https://expressjs.com/fr/guide/error-handling.html
