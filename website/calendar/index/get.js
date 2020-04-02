@@ -1,104 +1,80 @@
-import qb from "../../../knex/qb.js";
-import { centerFromTwoDate } from "../../../futurModule/dates/centerDate.js";
-import hooks from "../../../lib/express/hooks/hooks.js";
-import parsers from "../../../lib/validation/parsers/parsers.js";
+import { centerFromTwoDate } from '../../../futurModule/dates/centerDate.js'
+import parsers from '../../../lib/generics/parsers/parsers.js'
+import hooks from '../../../lib/generics/hooks/hooks.js'
+import knexContext from '../../../lib/knex/knexContext.js'
 
-// /calendar?plage=month&date=now       valeur par defaut en l'absence de parametre, affiche le mois en cours
-// /calendar?plage=year&date=now        affiche l'année en cours
-// /calendar?plage=week&date=now        affiche la semaine en cours
-// /calendar?plage=day&date=now         affiche le jour en cours
+// /calendar?range=month&date=now       valeur par defaut en l'absence de parametre, affiche le mois en cours
+// /calendar?range=year&date=now        affiche l'année en cours
+// /calendar?range=week&date=now        affiche la semaine en cours
+// /calendar?range=day&date=now         affiche le jour en cours
 
-// /calendar?plage=day&date=2020-05-02         affiche le jour indiqué (attetion il faut bien un jour complet)
-// /calendar?plage=week&date=2020-05-02        affiche la semaine du jour indiqué (attetion il faut bien un jour complet)
-// /calendar?plage=month&date=2020-05-02       affiche le mois du mois indiqué (si le mois est pas défini ca gueule, s'il y a le jour il est négligé)
-// /calendar?plage=year&date=2020-05-02       affiche l'année de l'année indiquée (si l'année est pas défini ca gueule, s'il y a le jour ou le mois il sont négligés)
+// /calendar?range=day&date=2020-05-02         affiche le jour indiqué (attetion il faut bien un jour complet)
+// /calendar?range=week&date=2020-05-02        affiche la semaine du jour indiqué (attetion il faut bien un jour complet)
+// /calendar?range=month&date=2020-05-02       affiche le mois du mois indiqué (si le mois est pas défini ca gueule, s'il y a le jour il est négligé)
+// /calendar?range=year&date=2020-05-02       affiche l'année de l'année indiquée (si l'année est pas défini ca gueule, s'il y a le jour ou le mois il sont négligés)
 
-// /calendar?plage=25&date=2020-05-02         affiche une page de temps de 25 jours centrée sur la date indiquées
-
+// /calendar?range=25&date=2020-05-02         affiche une page de temps de 25 jours centrée sur la date indiquées
 
 const getCalendarRules = {
-  
-    date : parsers.validation.standardRules.optionalISOdate( {
-        coalesce: 'now',
-        min:'1900-01-01T00:00' ,
-        max :'2200-01-01T00:00',
-    }),
-    plage : [
-        parsers.misc.coalesce({coalesce : 'month'}),
-        parsers.validation.combinatedRules.twoDatefromPlage()
-    ]
+
+  date: parsers.myparsers.standardRules.optionalISOdate({
+    value: 'now',
+    min: '1900-01-01T00:00',
+    max: '2200-01-01T00:00'
+  }),
+  range: [
+    parsers.misc.value({ value: 'month' }),
+    parsers.myparsers.combinatedRules.twoDateFromRange()
+  ]
 }
 
-/*
-function selectEvents ({ qb, table, archivedAt = 'archivedAt' }) {
-    return async ({ context }) => {
-
-      const { query: { plage: {start, end} } } = context
-
-      const events = await qb('t_agenda_evt')
-        .whereBetween('start', [ start, end ] )
-        .orWhereBetween('end', [ start, end ] )
-        //TODO OR (start <= '" + Twodate.start.toISOString() + "' AND end >= '" + Twodate.end.toISOString() + "') \
-        .orderBy('start')
-        .debug(true)
-              
-      return {
-          ...context,
-          events
-      }
-    }
-}*/
-
-
 function htmlRenderer () {
-    return async  ({context, response,request }) => {
-        const { events, query: {date,plage,plage: {start, end} } } = context
+  return async ({ context, response, request }) => {
+    const { events, query: { date, range, range: { start, end } } } = context
 
-        const classeoButonBase = "btn btn-outline-secondary "
-        const classBtDay = (plage === 'day')? classeoButonBase + "active" : classeoButonBase ;
-        const classBtWeek = (plage === 'week')? classeoButonBase + "active" : classeoButonBase ;
-        const classBtMonth = (plage === 'month')? classeoButonBase + "active" : classeoButonBase ;
-        const classBtYear = (plage === 'year')? classeoButonBase + "active" : classeoButonBase ;
+    const classButtonBase = 'btn btn-outline-secondary '
+    const classBtDay = (range === 'day') ? classButtonBase + 'active' : classButtonBase
+    const classBtWeek = (range === 'week') ? classButtonBase + 'active' : classButtonBase
+    const classBtMonth = (range === 'month') ? classButtonBase + 'active' : classButtonBase
+    const classBtYear = (range === 'year') ? classButtonBase + 'active' : classButtonBase
 
-        //gestion du active de la case maintenant (demande la date de maintenant en position centrale)
+    // gestion du active de la case maintenant (demande la date de maintenant en position centrale)
 
-        // Gestion des liens des boutons de plage de date
-        const dateCentrale = centerFromTwoDate(plage) // calcul de la datecentrale de la plage affichée
-        const hrefBtDay = (date == "now")? "/calendar?plage=day&date=now"  : "/calendar?plage=day&date=" + dateCentrale.toISOString()
-        const hrefBtWeek = (date == "now")? "/calendar?plage=week&date=now" : "/calendar?plage=week&date=" + dateCentrale.toISOString()
-        const hrefBtMonth = (date == "now")? "/calendar?plage=month&date=now" : "/calendar?plage=month&date=" + dateCentrale.toISOString()
-        const hrefBtYear = (date == "now")? "/calendar?plage=year&date=now" : "/calendar?plage=year&date=" + dateCentrale.toISOString()
-     
-        response.render('calendar/index/index.ejs', {
-            title: "Calendrier du " + start.toLocaleString() + " au " + end.toLocaleString() + " centré sur " + dateCentrale .toLocaleString()
-            ,events : events, 
-            dataForTimeline : events
-            
-            ,xhr : request.xhr 
-            ,torefresh : false // pas de rafraichissement de la page à faire en auto
-            ,plage : plage // la plage actuelle
-            ,ClassBtDay : classBtDay
-            ,ClassBtWeek : classBtWeek
-            ,ClassBtMonth : classBtMonth
-            ,ClassBtYear : classBtYear
-            ,hrefBtDay : hrefBtDay
-            ,hrefBtWeek : hrefBtWeek
-            ,hrefBtMonth : hrefBtMonth
-            ,hrefBtYear : hrefBtYear
-           // ,datecentrale : 
-        });
-      
-      return context
-    }
+    // Gestion des liens des boutons de range de date
+    const dateCentrale = centerFromTwoDate(range) // calcul de la datecentrale de la range affichée
+    const hrefBtDay = (date === 'now') ? '/calendar?range=day&date=now' : '/calendar?range=day&date=' + dateCentrale.toISOString()
+    const hrefBtWeek = (date === 'now') ? '/calendar?range=week&date=now' : '/calendar?range=week&date=' + dateCentrale.toISOString()
+    const hrefBtMonth = (date === 'now') ? '/calendar?range=month&date=now' : '/calendar?range=month&date=' + dateCentrale.toISOString()
+    const hrefBtYear = (date === 'now') ? '/calendar?range=year&date=now' : '/calendar?range=year&date=' + dateCentrale.toISOString()
+
+    response.render('calendar/index/index.ejs', {
+      title: 'Calendrier du ' + start.toLocaleString() + ' au ' + end.toLocaleString() + ' centré sur ' + dateCentrale.toLocaleString(),
+      events: events,
+      dataForTimeline: events,
+
+      xhr: request.xhr,
+      toRefresh: false, // pas de rafraichissement de la page à faire en auto
+      range: range, // la range actuelle
+      ClassBtDay: classBtDay,
+      ClassBtWeek: classBtWeek,
+      ClassBtMonth: classBtMonth,
+      ClassBtYear: classBtYear,
+      hrefBtDay: hrefBtDay,
+      hrefBtWeek: hrefBtWeek,
+      hrefBtMonth: hrefBtMonth,
+      hrefBtYear: hrefBtYear
+      // ,datecentrale :
+    })
+
+    return context
   }
-  
-  
-  // Export des hooks a executer pour index.js
-  export const GETcalendarHomeHooks = [
-    hooks.request.query(getCalendarRules),
-    //hooks.log.logger(),
-    hooks.calendar.events.byPeriod({ qb, table:'t_agenda_evt' }),
-    hooks.log.logger(),
-    htmlRenderer ()
-  ]
-  
+}
+
+// Export des hooks à executer pour index.js
+export const GETcalendarHomeHooks = [
+  hooks.request.input.query(getCalendarRules),
+  hooks.log.logger(),
+  hooks.myhooks.calendar.events.byPeriod({ ...knexContext, table: 't_agenda_evt' }),
+  hooks.log.logger(),
+  htmlRenderer()
+]

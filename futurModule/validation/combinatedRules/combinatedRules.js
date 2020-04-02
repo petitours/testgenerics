@@ -1,7 +1,6 @@
-import twoDatefromPlage from "./twoDatefromPlage.js";
-
+import twoDateFromRange from './twoDateFromRange.js'
 
 export default {
-  twoDatefromPlage
+  twoDateFromRange
 
 }

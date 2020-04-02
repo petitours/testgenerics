@@ -5,8 +5,8 @@ import elementaryRules from './elementaryRules/elementaryRules.js'
 
 export default {
   basicRules,
-  elementaryRules,  
+  elementaryRules,
   combinatedRules,
   standardRules
-  
+
 }

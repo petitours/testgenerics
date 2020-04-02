@@ -2,8 +2,8 @@
 import { on } from 'anticore'
 
 function parse (meta) {
-  let [delay, href] = meta.getAttribute('content').split(';URL=')
-  
+  const [delay, href] = meta.getAttribute('content').split(';URL=')
+
   return {
     delay: delay - 1,
     href
@@ -26,7 +26,7 @@ function countdown (target, counter) {
   if (!counter.delay) {
     clearInterval(counter.interval)
   }
-  
+
   target.textContent = counter.delay
   counter.delay -= 1
 }
@@ -38,14 +38,14 @@ function redirect (event) {
 
 on(':root meta[http-equiv="refresh"]', (element, next) => {
   const counter = parse(element)
-  
+
   defer(select(document), counter)
   next()
 })
 
 on('.anticore meta[http-equiv="refresh"]', (element, next) => {
   const counter = parse(element)
-  
+
   defer(select(element.parentNode), counter)
   setTimeout(refresh, counter.delay * 1000, counter)
   next()

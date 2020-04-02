@@ -1,13 +1,11 @@
+import parsers from '../../../lib/generics/parsers/parsers.js'
 
-
-import parsers from "../../../lib/validation/parsers/parsers.js";
-
-export default function optionalISOdate({coalesce,min,max}){
+export default function optionalISOdate ({ value, min, max }) {
   return [
-      parsers.misc.coalesce({coalesce}),           // recupère la valeur par defaut si pas de valeur
-      parsers.validation.basicRules.ISOdate.nowToISOdatestring(),       // recupère une chaine ISO avec que la date si la valeur est à 'now' soit 2020-03-18
-      parsers.validation.basicRules.ISOdate.type(),                   // fourni une Date locale correspondant au jour indiqué, seuls les jour
-      parsers.datetime.min({min}),
-      parsers.datetime.max({max}),
-   ]
+    parsers.misc.value({ value }), // recupère la valeur par defaut si pas de valeur
+    parsers.myparsers.basicRules.ISOdate.nowToISOdatestring(), // recupère une chaine ISO avec que la date si la valeur est à 'now' soit 2020-03-18
+    parsers.myparsers.basicRules.ISOdate.type(), // fourni une Date locale correspondant au jour indiqué, seuls les jour
+    parsers.w3c.datetime.min({ min }),
+    parsers.w3c.datetime.max({ max })
+  ]
 }

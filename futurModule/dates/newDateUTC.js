@@ -1,8 +1,5 @@
 
-
-
-export function newDateUTC(date){
-
+export function newDateUTC (date) {
   return new Date(Date.UTC(
 
     date.getFullYear(),

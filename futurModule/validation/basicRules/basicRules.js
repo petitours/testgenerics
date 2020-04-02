@@ -1,6 +1,5 @@
 
-import ISOdate from "./ISOdate/ISOdate.js";
-
+import ISOdate from './ISOdate/ISOdate.js'
 
 export default {
   ISOdate

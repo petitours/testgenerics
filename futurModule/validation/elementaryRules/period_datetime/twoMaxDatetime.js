@@ -1,16 +1,11 @@
-import parsers from "@lcf.vs/generics/lib/validation/parsers/parsers.js";
+import parsers from '@lcf.vs/generics/lib/validation/parsers/parsers.js'
 
+export default function twoMaxDatetime ({ max }) {
+  const test = parsers.w3c.datetime.max({ max }) // plus performance de créer le test avant le return (pas une fonction créée a chaque test)
 
-
-export default function twoMaxDatetime ({max}) {
-
-  const test = parsers.datetime.max({max}) //plus performance de créer le test avant le return (pas une fonction créée a chaque test)
-  
   return async value => {
+    return Promise.all(value.map(await test))
 
-    return Promise.all( value.map( await test ) )
-
-       // pas besoin de throw puisque datatime() le fait
+    // pas besoin de throw puisque datatime() le fait
   }
-
 }
