@@ -5,7 +5,7 @@ import knexContext from '../../../lib/knex/knexContext.js'
 const getEventDelete = {
   confirmation: [
     parsers.misc.value({ defaultValue: 'false' }), // si pas défini on lui donne la valeur false
-    parsers.native.boolean.type() // vérifie que c'est bien un bouléen
+    parsers.native.boolean.type() // vérifie que c'est bien un booléen
   ]
 }
 
@@ -28,13 +28,12 @@ function htmlRenderer () {
 
 // Export des hooks a executer pour index.js
 export const GETdelCalendarHooks = [
-  hooks.request.input.params({ id: parsers.myparsers.standardRules.requiredEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_evt' }) }), // vérifie que l'id correspond a un evenement et si oui on le récupère dans le context
-  // hooks.log.logger(),
+  hooks.request.input.params({ id: parsers.myparsers.standardRules.requiredID() }), // vérifie qu'on a bien recu un ID valide
+  hooks.log.logger(),
   hooks.request.input.query(getEventDelete), // recupère la confirmation d'effacement (booléen)
   // hooks.log.logger(),
-  hooks.knex.getEntity(), // test si l'evenement existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
+  hooks.knex.findEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_evt' }), // test si l'evenement existe (et le récupère) et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
   hooks.knex.archiveEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_evt' }), // marque
-  // getEvent (), // recupération de l'evenement à effacer
   // hooks.log.logger(),
   htmlRenderer()
 ]

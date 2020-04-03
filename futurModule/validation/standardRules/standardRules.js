@@ -1,13 +1,11 @@
-import optionalISOdate from './optionalISOdate.js'
+import optionalDateISO from './optionalDateISO.js'
 import requiredDatetimePeriod from './requiredDatetimePeriod.js'
-import requiredEntity from './requiredEntity.js'
 import requiredID from './requiredID.js'
 import requiredText from './requiredText.js'
 
 export default {
-  optionalISOdate,
+  optionalDateISO,
   requiredDatetimePeriod,
-  requiredEntity,
   requiredID,
   requiredText
 }

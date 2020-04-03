@@ -8,7 +8,7 @@ import { GETaddCalendarHooks } from './website/calendar/add/get.js'
 import { POSTaddCalendarHooks } from './website/calendar/add/post.js'
 import { GETsimuErrorHooks } from './website/simuErreur.js'
 import { GEThome } from './website/home/index/get.js'
-import { GETcalendarHomeHooks } from './website/calendar/index/get.js'
+import { GetCalendarHomeHooks } from './website/calendar/index/get.js'
 import { GETeditCalendarHooks } from './website/calendar/edit/get.js'
 import { POSTeditCalendarHooks } from './website/calendar/edit/post.js'
 import { GETdelCalendarHooks } from './website/calendar/del/get.js'
@@ -79,7 +79,7 @@ app.use(upload.none())
 
 // Routes de l'application
 app.get('/', attempt(GEThome))
-app.get('/calendar', attempt(GETcalendarHomeHooks)) // avec ou sans parametre
+app.get('/calendar', attempt(GetCalendarHomeHooks)) // avec ou sans parametre
 
 app.get('/calendar/add', attempt(GETaddCalendarHooks))
 app.post('/calendar/add', attempt(POSTaddCalendarHooks))

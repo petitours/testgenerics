@@ -2,6 +2,7 @@ import { centerFromTwoDate } from '../../../futurModule/dates/centerDate.js'
 import parsers from '../../../lib/generics/parsers/parsers.js'
 import hooks from '../../../lib/generics/hooks/hooks.js'
 import knexContext from '../../../lib/knex/knexContext.js'
+import utils from '@lcf.vs/generics/lib/utils/utils.js'
 
 // /calendar?range=month&date=now       valeur par defaut en l'absence de parametre, affiche le mois en cours
 // /calendar?range=year&date=now        affiche l'année en cours
@@ -15,15 +16,17 @@ import knexContext from '../../../lib/knex/knexContext.js'
 
 // /calendar?range=25&date=2020-05-02         affiche une page de temps de 25 jours centrée sur la date indiquées
 
-const getCalendarRules = {
+utils.logger({ format: value => ({ myFirstNamedLog: value }) })
 
-  date: parsers.myparsers.standardRules.optionalISOdate({
+const getCalendarRules = {
+  date: parsers.myparsers.standardRules.optionalDateISO({
     value: 'now',
     min: '1900-01-01T00:00',
     max: '2200-01-01T00:00'
   }),
   range: [
     parsers.misc.value({ value: 'month' }),
+    utils.logger({ format: value => ({ myFirstNamedLog: value }) }),
     parsers.myparsers.combinatedRules.twoDateFromRange()
   ]
 }
@@ -71,10 +74,10 @@ function htmlRenderer () {
 }
 
 // Export des hooks à executer pour index.js
-export const GETcalendarHomeHooks = [
+export const GetCalendarHomeHooks = [
   hooks.request.input.query(getCalendarRules),
-  hooks.log.logger(),
+  // hooks.log.logger(),
   hooks.myhooks.calendar.events.byPeriod({ ...knexContext, table: 't_agenda_evt' }),
-  hooks.log.logger(),
+  // hooks.log.logger(),
   htmlRenderer()
 ]

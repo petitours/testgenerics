@@ -3,11 +3,7 @@ import knexContext from '../../../lib/knex/knexContext.js'
 import hooks from '../../../lib/generics/hooks/hooks.js'
 
 const getEditCalendarRules = {
-  id: parsers.myparsers.standardRules.requiredEntity({
-    ...knexContext,
-    table: 't_agenda_evt',
-    id: 'id_evt'
-  })
+  id: parsers.myparsers.standardRules.requiredID()
 }
 
 function htmlRenderer () {
@@ -27,7 +23,7 @@ function htmlRenderer () {
 export const GETeditCalendarHooks = [
   hooks.request.input.params(getEditCalendarRules),
   // hooks.log.logger(),
-  hooks.knex.getEntity(), // test si l'evenement existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
+  hooks.knex.findEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_event' }), // récupère l'évènement si l'event existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
   // hooks.log.logger(),
   htmlRenderer()
 ]
