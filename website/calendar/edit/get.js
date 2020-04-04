@@ -22,7 +22,7 @@ function htmlRenderer () {
 // Export des hooks a executer pour index.js
 export const GETeditCalendarHooks = [
   hooks.request.input.params(getEditCalendarRules),
-  // hooks.log.logger(),
+  hooks.log.logger(),
   hooks.knex.findEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_event' }), // récupère l'évènement si l'event existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
   // hooks.log.logger(),
   htmlRenderer()

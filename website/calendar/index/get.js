@@ -26,8 +26,9 @@ const getCalendarRules = {
   }),
   range: [
     parsers.misc.value({ value: 'month' }),
-    utils.logger({ format: value => ({ myFirstNamedLog: value }) }),
-    parsers.myparsers.combinatedRules.twoDateFromRange()
+    utils.logger({ format: value => ({ rangeparsers: value }) }),
+    parsers.myparsers.combinatedRules.twoDateFromRange(),
+    utils.logger({ format: value => ({ twoDateFromRange: value }) })
   ]
 }
 
@@ -76,8 +77,10 @@ function htmlRenderer () {
 // Export des hooks à executer pour index.js
 export const GetCalendarHomeHooks = [
   hooks.request.input.query(getCalendarRules),
-  // hooks.log.logger(),
+  //hooks.log.logger({ format: context => ({ rangeparsersquery: context }) }),
+  hooks.log.logger(),
   hooks.myhooks.calendar.events.byPeriod({ ...knexContext, table: 't_agenda_evt' }),
-  // hooks.log.logger(),
+  //hooks.log.logger({ format: context => ({ rangeparsersbyPeriod: context }) }),
+  hooks.log.logger(),
   htmlRenderer()
 ]
