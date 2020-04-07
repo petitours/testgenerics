@@ -3,6 +3,7 @@ import parsers from '../../../lib/generics/parsers/parsers.js'
 import hooks from '../../../lib/generics/hooks/hooks.js'
 import knexContext from '../../../lib/knex/knexContext.js'
 import utils from '../../../lib/generics/utils/utils.js'
+import format from '@lcf.vs/generics/lib/types/string/format.js'
 
 // /calendar?range=month&date=now       valeur par defaut en l'absence de parametre, affiche le mois en cours
 // /calendar?range=year&date=now        affiche l'année en cours
@@ -76,8 +77,10 @@ function htmlRenderer () {
 // Export des hooks à executer pour index.js
 export const GetCalendarHomeHooks = [
   hooks.request.input.query(getCalendarRules),
+  hooks.log.logger({ format: context => ({ getCalendarQuery: context.context }) }),
   //utils.myUtils.trace('calendarHomeQuery'),
   hooks.myHooks.calendar.events.byPeriod({ ...knexContext, table: 'events' }),
+  hooks.log.logger({ format: context => ({ getCalendarByperiod: context.context }) }),
   //utils.myUtils.trace('calendarHomeByPeriod'),
   htmlRenderer()
 ]

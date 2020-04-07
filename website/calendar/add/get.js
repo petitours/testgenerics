@@ -16,6 +16,7 @@ function htmlRenderer () {
 // Export des hooks a executer pour index.js
 
 export const GETaddCalendarHooks = [
-  utils.myUtils.trace('calendarHomeQuery'),
+  //utils.myUtils.trace('calendarHomeQuery'),
+  hooks.log.logger(),
   htmlRenderer()
 ]

@@ -3,7 +3,7 @@ import { on } from 'anticore'
 import flatpickr from 'flatpickr'
 import { French } from 'flatpickr/dist/l10n/fr.js'
 
-on('.anticore .dtpkr', (element, next) => {
+on('.anticore .dtpkrRange', (element, next) => {
   flatpickr(element, {
 
     locale: French,
