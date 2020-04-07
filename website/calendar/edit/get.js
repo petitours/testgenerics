@@ -1,6 +1,7 @@
 import parsers from '../../../lib/generics/parsers/parsers.js'
 import knexContext from '../../../lib/knex/knexContext.js'
 import hooks from '../../../lib/generics/hooks/hooks.js'
+import logger from '@lcf.vs/generics/lib/utils/logger.js'
 
 const getEditCalendarRules = {
   id: parsers.myparsers.standardRules.requiredID()
@@ -22,8 +23,8 @@ function htmlRenderer () {
 // Export des hooks a executer pour index.js
 export const GETeditCalendarHooks = [
   hooks.request.input.params(getEditCalendarRules),
-  hooks.log.logger(),
+  logger(),
   hooks.knex.findEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_event' }), // récupère l'évènement si l'event existe et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
-  // hooks.log.logger(),
+  logger(),
   htmlRenderer()
 ]

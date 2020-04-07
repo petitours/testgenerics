@@ -1,20 +1,23 @@
-import env from './bootstrap.js'
+import './bootstrap.js'
+import { resolve } from 'path'
+import { env } from 'process'
 
-export default {
-  development: {
+export const {
+  development = {
     client: 'sqlite3',
     connection: {
-      filename: './knex/dev/db.sqlite3'
+      filename: resolve('./db.sqlite3')
     },
     migrations: {
-      directory: './knex/dev/migrations'
+      directory: resolve('./migrations')
     },
     seeds: {
-      directory: './knex/dev/seeds'
-    }
+      directory: resolve('./seeds')
+    },
+    useNullAsDefault: true
   },
 
-  production: {
+  production = {
     client: 'mysql2',
     connection: {
       host: env.DB_HOST,
@@ -23,10 +26,11 @@ export default {
       database: env.DB_DATABASE
     },
     migrations: {
-      directory: './knex/dev/migrations'
+      directory: resolve('./migrations')
     },
     seeds: {
-      directory: './knex/dev/seeds'
-    }
+      directory: resolve('./seeds')
+    },
+    useNullAsDefault: true
   }
-}
+} = {}

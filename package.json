@@ -6,11 +6,11 @@
   "scripts": {
     "debug": "node --nolazy --inspect-brk=9229 index.js",
     "start": "node index.js",
-    "prod": "webpack-cli --mode production --display-modules",
+    "prod": "webpack-cli  --mode production --display-modules",
     "devBlabla": "webpack-cli --mode development -w --display-modules",
     "dev": "webpack-cli --mode development -w ",
     "stats": "webpack-cli --mode production --json > stats.json",
-    "migrate": "node -r esm ./knex/migrate.js"
+    "knex": "knex --esm --knexfile knexfile.cjs --"
   },
   "engines": {
     "node": "13.x"
@@ -48,6 +48,7 @@
     "webpack": "^4.42.1"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",

@@ -3,22 +3,22 @@ import express from 'express'
 import session from 'cookie-session'
 import helmet from 'helmet'
 import multer from 'multer'
-import env from './bootstrap.js'
+import { env } from 'process'
 import { GETaddCalendarHooks } from './website/calendar/add/get.js'
 import { POSTaddCalendarHooks } from './website/calendar/add/post.js'
 import { GETsimuErrorHooks } from './website/simuErreur.js'
-import { GEThome } from './website/home/index/get.js'
+import { GetHome } from './website/home/index/get.js'
 import { GetCalendarHomeHooks } from './website/calendar/index/get.js'
 import { GETeditCalendarHooks } from './website/calendar/edit/get.js'
 import { POSTeditCalendarHooks } from './website/calendar/edit/post.js'
-import { GETdelCalendarHooks } from './website/calendar/del/get.js'
+import { GetCalendarDelHooks } from './website/calendar/del/get.js'
 import attempt from '@lcf.vs/generics/lib/express/attempt.js'
 
 const app = express()
 const port = 8080
 
 // configure middleware
-app.set('port', process.env.port || port) // set express to use this port
+app.set('port', env.port || port) // set express to use this port
 app.set('views', './website') // set express to look in this folder to render our view
 app.set('view engine', 'ejs') // configure template engine
 
@@ -78,8 +78,8 @@ const upload = multer()
 app.use(upload.none())
 
 // Routes de l'application
-app.get('/', attempt(GEThome))
-app.get('/calendar', attempt(GetCalendarHomeHooks)) // avec ou sans parametre
+app.get('/', attempt(GetHome))
+app.get('/calendar', attempt(GetCalendarHomeHooks)) // avec ou sans parametres
 
 app.get('/calendar/add', attempt(GETaddCalendarHooks))
 app.post('/calendar/add', attempt(POSTaddCalendarHooks))
@@ -87,7 +87,7 @@ app.post('/calendar/add', attempt(POSTaddCalendarHooks))
 app.get('/calendar/edit/:id', attempt(GETeditCalendarHooks))
 app.post('/calendar/edit/:id', attempt(POSTeditCalendarHooks))
 
-app.get('/calendar/del/:id', attempt(GETdelCalendarHooks))// avec ous sans confirmation en parametre
+app.get('/calendar/del/:id', attempt(GetCalendarDelHooks))// avec ous sans confirmation en parametre
 
 app.get('/simuerreur', attempt(GETsimuErrorHooks))
 

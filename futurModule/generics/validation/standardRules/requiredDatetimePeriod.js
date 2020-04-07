@@ -5,7 +5,7 @@ import period_datetime from '../elementaryRules/period_datetime/period_datetime.
 export default function requiredDatetimePeriod ({ separator, min, max, step, ecartms }) {
   return [
     parsers.misc.required(), // retourne une chaine si valide
-    parsers.native.string.type(), // retourne une string si valide
+    parsers.w3c.string.type(), // retourne une string si valide
     period_datetime.stringPeriodToDatetime({ separator }), // retourne un array de 2 chaines
     period_datetime.twoDatetime(), // retourne un array de 2 datetime à partir de l'array de 2 chaines
     period_datetime.twoMinDatetime({ min }),

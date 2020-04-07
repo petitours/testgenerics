@@ -1,4 +1,6 @@
 import hooks from '../../../lib/generics/hooks/hooks.js'
+import utils from '../../../lib/generics/utils/utils.js'
+
 
 function htmlRenderer () {
   return async ({ context, response, request }) => {
@@ -13,7 +15,7 @@ function htmlRenderer () {
 }
 
 // Export des hooks a executer pour index.js
-export const GEThome = [
-  hooks.log.logger(),
+export const GetHome = [
+  //utils.myUtils.trace('calendarHomeQuery'),
   htmlRenderer()
 ]

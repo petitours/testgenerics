@@ -6,8 +6,8 @@ export function up (qb) {
       table.dateTime('updatedDate').nullable()
       table.dateTime('archivedDate').nullable()
       table.string('content', 100).notNullable()
-      table.dateTime('startDate').notNullable()
-      table.dateTime('endDate').notNullable()
+      table.dateTime('start').notNullable()
+      table.dateTime('end').notNullable()
     })
 }
 

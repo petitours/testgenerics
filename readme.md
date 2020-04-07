@@ -11,9 +11,11 @@ Permet d'éviter des problèmes de lien vers le .env (sous windows par exemple o
 
 bootstrap.js parse le fichier .env. importé dans tous les points d'enrtée de l'application il fourni les information du .env parsées.
 
+# genericsConfig.js
+Contient la configuration du trace pour le module generics
+
 # index.js
 Launcher de l'application basée sur Express
-
 
 # jsconfig.json
 The presence of jsconfig.json file in a directory indicates that the directory is the root of a JavaScript Project. The jsconfig.json file specifies the root files and the options for the features provided by the JavaScript language service de Visual Studio Code.

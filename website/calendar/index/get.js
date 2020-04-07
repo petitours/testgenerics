@@ -2,7 +2,7 @@ import { centerFromTwoDate } from '../../../futurModule/dates/centerDate.js'
 import parsers from '../../../lib/generics/parsers/parsers.js'
 import hooks from '../../../lib/generics/hooks/hooks.js'
 import knexContext from '../../../lib/knex/knexContext.js'
-import utils from '@lcf.vs/generics/lib/utils/utils.js'
+import utils from '../../../lib/generics/utils/utils.js'
 
 // /calendar?range=month&date=now       valeur par defaut en l'absence de parametre, affiche le mois en cours
 // /calendar?range=year&date=now        affiche l'année en cours
@@ -16,7 +16,6 @@ import utils from '@lcf.vs/generics/lib/utils/utils.js'
 
 // /calendar?range=25&date=2020-05-02         affiche une page de temps de 25 jours centrée sur la date indiquées
 
-utils.logger({ format: value => ({ myFirstNamedLog: value }) })
 
 const getCalendarRules = {
   date: parsers.myparsers.standardRules.optionalDateISO({
@@ -26,9 +25,9 @@ const getCalendarRules = {
   }),
   range: [
     parsers.misc.value({ value: 'month' }),
-    utils.logger({ format: value => ({ rangeparsers: value }) }),
+    utils.myUtils.trace('rangeDefault'),
     parsers.myparsers.combinatedRules.twoDateFromRange(),
-    utils.logger({ format: value => ({ twoDateFromRange: value }) })
+    utils.myUtils.trace('rangeTwoDate')
   ]
 }
 
@@ -77,10 +76,8 @@ function htmlRenderer () {
 // Export des hooks à executer pour index.js
 export const GetCalendarHomeHooks = [
   hooks.request.input.query(getCalendarRules),
-  //hooks.log.logger({ format: context => ({ rangeparsersquery: context }) }),
-  hooks.log.logger(),
-  hooks.myhooks.calendar.events.byPeriod({ ...knexContext, table: 't_agenda_evt' }),
-  //hooks.log.logger({ format: context => ({ rangeparsersbyPeriod: context }) }),
-  hooks.log.logger(),
+  //utils.myUtils.trace('calendarHomeQuery'),
+  hooks.myHooks.calendar.events.byPeriod({ ...knexContext, table: 'events' }),
+  //utils.myUtils.trace('calendarHomeByPeriod'),
   htmlRenderer()
 ]

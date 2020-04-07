@@ -1,4 +1,4 @@
-import { twoDateYear, twoDateMonth, twoDateWeek, twoDateFromCenter, twoDateDay } from '../../dates/centerDate.js'
+import { twoDateYear, twoDateMonth, twoDateWeek, twoDateFromCenter, twoDateDay } from '../../../dates/centerDate.js'
 
 // retourne une range de datetime à partir de 'date' et d'une range en jour ou valeurs standard
 export default function twoDateFromRange () {
