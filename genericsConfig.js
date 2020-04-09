@@ -1,4 +1,4 @@
-// config for generics module
+// generics module config
 
 export default {
   modeDebug: true

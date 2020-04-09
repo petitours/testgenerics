@@ -6,8 +6,8 @@
           <li class="breadcrumb-item"><a href="#">Accueil</a></li>
           <li class="breadcrumb-item active" aria-current="page"><h1><%= title %></h1></li>
         </ol>
-      </nav>      
- 
+      </nav>
+
         <!--form action="..." method="post" enctype="multipart/form-data">
           <fieldset>
             <p><label>Date centrale <input name="centralDate" max="" min="" step="" type="date" value="2020-05-02"></label></p>
@@ -34,7 +34,7 @@
             <a role="button" href="/calendar/add" class="btn btn-outline-secondary" title="Création d'un nouvel évènement">Créer</a>
           </div>
         </div>
-        
+
         <div id="timelineici"></div>
 
         <a href="/simuerreur" >declencher erreur</a> </br>
@@ -52,7 +52,7 @@
               <table class="table table-hovered">
                   <thead class="thead-dark">
                       <tr>
-                          <th scope="col">id_evt</th>
+                          <th scope="col">id</th>
                           <th scope="col">Evènement</th>
                           <th scope="col">Début</th>
                           <th scope="col">Fin</th>
@@ -62,18 +62,18 @@
                   <tbody>
                       <% events.forEach((event, index) => { %>
                           <tr itemscope itemtype="http://schema.org/Event">
-                              <th scope="row" itemprop="identifier"><%= event.id_evt %></th>
+                              <th scope="row" itemprop="identifier"><%= event.id %></th>
                               <td itemprop="name"><%= event.content %></td>
                               <td itemprop="startDate" content="<%= event.start.toISOString() %>"><%= event.start.toLocaleString() %></td>
                               <td itemprop="endDate" content="<%= event.end.toISOString() %>"><%= event.end.toLocaleString() %></td>
                               <td>
-                                  <a href="/calendar/edit/<%= event.id_evt %>" class="btn btn-sm btn-success fawe " title="Editer l'évènement"></a>
-                                  <a href="/calendar/del/<%= event.id_evt %>" class="btn btn-sm btn-danger fawe " title="Supprimer l'évènement"></a>
+                                  <a href="/calendar/edit/<%= event.id %>" class="btn btn-sm btn-success fawe " title="Editer l'évènement"></a>
+                                  <a href="/calendar/del/<%= event.id %>" class="btn btn-sm btn-danger fawe " title="Supprimer l'évènement"></a>
                               </td>
                           </tr>
                       <% }) %>
                   </tbody>
-              </table> 
+              </table>
           <% } else { %>
               <p class="text-center">Aucun évènement trouvé. Aller <a href="/calendar/add" >à cette page</a> pour ajouter un évènement.</p>
           <% } %>
@@ -82,7 +82,7 @@
     </main>
 
 
-    <!--script> var dataForTimeline2 = <%- dataForTimeline  %> ; </script-->   
+    <!--script> var dataForTimeline2 = <%- dataForTimeline  %> ; </script-->
 
 
 <%- include('../../partials/footer.ejs') %>

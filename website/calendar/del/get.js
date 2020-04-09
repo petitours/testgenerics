@@ -33,8 +33,8 @@ export const GetCalendarDelHooks = [
   logger(),
   hooks.request.input.query(getEventDelete), // recupère la confirmation d'effacement (booléen)
   logger(),
-  hooks.knex.findEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_evt' }), // test si l'evenement existe (et le récupère) et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
-  hooks.knex.archiveEntity({ ...knexContext, table: 't_agenda_evt', id: 'id_evt' }), // marque
+  hooks.knex.findEntity({ ...knexContext, table: 'events' }), // test si l'evenement existe (et le récupère) et déclenche une erreur 404 le cas contraire (en redonnant la main à express avec next())
+  hooks.knex.archiveEntity({ ...knexContext, table: 'events'}), // marque
   logger(),
   htmlRenderer()
 ]

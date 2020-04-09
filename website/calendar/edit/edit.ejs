@@ -1,12 +1,12 @@
 
 <section class="lightbox ">
   <div class="modal-lightbox">
-      
+
       <span class="Anticore-close-lb close-cursor cursor" >&times;</span>
-      <div class="modal-lightbox-content lb_edit">          
-          <h1>Édition évènement <%= event.id_evt %></h1>
+      <div class="modal-lightbox-content lb_edit">
+          <h1>Édition évènement <%= event.id %></h1>
             <% if (event) { %>
-                <form action="/calendar/edit/<%= event.id_evt %>" enctype="multipart/form-data" method="post">
+                <form action="/calendar/edit/<%= event.id %>" enctype="multipart/form-data" method="post">
                 <fieldset>
                     <div class="form-group">
                         <label for="content">Description de l'évènement</label>
@@ -25,5 +25,5 @@
             <% } %>
       </div>
   </div>
-  
+
 </section>

@@ -24,7 +24,7 @@ monknex.schema.dropTableIfExists('t_agenda_evt').then(function () {
 
 // recreation de la table
 monknex.schema.createTable('t_agenda_evt', function (table) {
-  table.increments('id_evt').primary()
+  table.increments('id').primary()
   table.string('content', 250)
   table.dateTime('start')
   table.dateTime('end')

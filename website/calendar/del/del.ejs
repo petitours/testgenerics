@@ -1,21 +1,21 @@
 
 <section class="lightbox ">
   <div class="modal-lightbox">
-      
+
       <span class="Anticore-close-lb close-cursor cursor" >&times;</span>
-      <div class="modal-lightbox-content lb_del">          
-          <h1>Effacement de l'évènement <%= event.id_evt %></h1>
+      <div class="modal-lightbox-content lb_del">
+          <h1>Effacement de l'évènement <%= event.id %></h1>
             <% if (event) { %>
 
                 <div class="btn-group" role="group" aria-label="Third group">
-                    <a role="button" href="/calendar/del/<%= event.id_evt %>?confirmation=true" class="btn btn-outline-secondary" title="Supprimer l'évènement.">Supprimer l'évènement.</a>
+                    <a role="button" href="/calendar/del/<%= event.id %>?confirmation=true" class="btn btn-outline-secondary" title="Supprimer l'évènement.">Supprimer l'évènement.</a>
                     <span role="button" class="btn btn-danger Anticore-close-lb" title="Annuler">Annuler</span>
                 </div>
-                
+
             <% } else { %>
                 <p class="text-center">Evènement non trouvé.</p>
             <% } %>
       </div>
   </div>
-  
+
 </section>
