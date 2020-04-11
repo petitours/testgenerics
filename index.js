@@ -4,15 +4,10 @@ import session from 'cookie-session'
 import helmet from 'helmet'
 import multer from 'multer'
 import { env } from 'process'
-import { GETaddCalendarHooks } from './website/calendar/add/get.js'
-import { POSTaddCalendarHooks } from './website/calendar/add/post.js'
-import { GETsimuErrorHooks } from './website/simuErreur.js'
-import { GetHome } from './website/home/index/get.js'
-import { GetCalendarHomeHooks } from './website/calendar/index/get.js'
-import { GETeditCalendarHooks } from './website/calendar/edit/get.js'
-import { POSTeditCalendarHooks } from './website/calendar/edit/post.js'
-import { GetCalendarDelHooks } from './website/calendar/del/get.js'
-import attempt from '@lcf.vs/generics/lib/express/attempt.js'
+import templates from './website/templates.js'
+import knexContext from './lib/genericsImport/knex/knexContext.js'
+import hooks from './lib/genericsExtended/myHooks/myHooks.js'
+import route from '@lcf.vs/generics/lib/express/route.js'
 
 const app = express()
 const port = 8080
@@ -78,6 +73,8 @@ const upload = multer()
 app.use(upload.none())
 
 // Routes de l'application
+route(app, knexContext, hooks.response.renderer, templates)
+/*
 app.get('/', attempt(GetHome))
 app.get('/calendar', attempt(GetCalendarHomeHooks)) // avec ou sans parametres
 
@@ -89,7 +86,7 @@ app.post('/calendar/edit/:id', attempt(POSTeditCalendarHooks))
 
 app.get('/calendar/del/:id', attempt(GetCalendarDelHooks))// avec ous sans confirmation en parametre
 
-app.get('/simuerreur', attempt(GETsimuErrorHooks))
+app.get('/simuerreur', attempt(GETsimuErrorHooks))*/
 
 // Gestion des erreurs 400
 app.use((err, request, response, next) => {
