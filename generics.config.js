@@ -8,7 +8,7 @@ export default {
     logger: hooks.log.logger
   },
   parsers: {
-    depth: 5,
+    //depth: 5,
     name: 'parsers',
     logger: parsers.log.logger
   }

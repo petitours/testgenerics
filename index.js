@@ -8,6 +8,7 @@ import templates from './website/templates.js'
 import knexContext from './lib/genericsImport/knex/knexContext.js'
 import route from '@lcf.vs/generics/lib/express/route.js'
 import hooks from './lib/genericsImport/hooks/hooks.js'
+import entities from './lib/entities/entities.js'
 
 const app = express()
 const port = 8080
@@ -73,7 +74,13 @@ const upload = multer()
 app.use(upload.none())
 
 // Routes de l'application
-route(app, knexContext, hooks.response.renderer, templates)
+route({
+  app,
+  entities,
+  knexContext,
+  renderer: hooks.response.renderer,
+  templates
+})
 /*
 app.get('/', attempt(GetHome))
 app.get('/calendar', attempt(GetCalendarHomeHooks)) // avec ou sans parametres
