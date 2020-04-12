@@ -6,8 +6,8 @@ import multer from 'multer'
 import { env } from 'process'
 import templates from './website/templates.js'
 import knexContext from './lib/genericsImport/knex/knexContext.js'
-import hooks from './lib/genericsExtended/myHooks/myHooks.js'
 import route from '@lcf.vs/generics/lib/express/route.js'
+import hooks from './lib/genericsImport/hooks/hooks.js'
 
 const app = express()
 const port = 8080
