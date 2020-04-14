@@ -1,4 +1,4 @@
-<% if (xhr === false) {%>
+<% if (meta.xhr === false) {%>
 
 <!doctype html>
 <html lang="fr">
@@ -18,7 +18,7 @@
 
     <link href="/js/vis-timeline/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
 
-    <title><%= title %></title>
+    <title><%= meta.title %></title>
 
     <!--% if (toRefresh === true) {%-->
       <!--meta http-equiv="refresh" content="5;URL=/" -->

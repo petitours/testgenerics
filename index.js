@@ -5,10 +5,8 @@ import helmet from 'helmet'
 import multer from 'multer'
 import { env } from 'process'
 import templates from './website/templates.js'
-import knexContext from './lib/genericsImport/knex/knexContext.js'
 import route from '@lcf.vs/generics/lib/express/route.js'
-import hooks from './lib/genericsImport/hooks/hooks.js'
-import entities from './lib/entities/entities.js'
+import dao from './lib/dao/dao.js'
 
 const app = express()
 const port = 8080
@@ -74,13 +72,7 @@ const upload = multer()
 app.use(upload.none())
 
 // Routes de l'application
-route({
-  app,
-  entities,
-  knexContext,
-  renderer: hooks.response.renderer,
-  templates
-})
+route({ app, dao, templates })
 /*
 app.get('/', attempt(GetHome))
 app.get('/calendar', attempt(GetCalendarHomeHooks)) // avec ou sans parametres
@@ -93,19 +85,20 @@ app.post('/calendar/edit/:id', attempt(POSTeditCalendarHooks))
 
 app.get('/calendar/del/:id', attempt(GetCalendarDelHooks))// avec ous sans confirmation en parametre
 
-app.get('/simuerreur', attempt(GETsimuErrorHooks))*/
+app.get('/simuerreur', attempt(GETsimuErrorHooks)) */
 
 // Gestion des erreurs 400
 app.use((err, request, response, next) => {
   console.log(err)
   if (err.code === 400) {
-    Object.values(err.errors).forEach(error => console.log(error))
-
+    //Object.values(err.errors).forEach(error => console.log(error))
     return response.status(400).render('errors/400.ejs', {
-      title: 'Bad request',
-      errors: err,
-      xhr: request.xhr,
-      toRefresh: true
+      errors: '',
+      meta: {
+        title: 'Bad request',
+        xhr: request.xhr,
+        toRefresh: true
+      }
     })
   }
   next(err)
@@ -126,10 +119,12 @@ app.use((err, request, response, next) => {
   if (err) {
     console.log(err)
     return response.status(500).render('errors/500.ejs', {
-      title: 'Erreur inconnue',
-      errors: err,
-      xhr: request.xhr,
-      toRefresh: true
+      errors: '',
+      meta: {
+        title: 'Erreur inconnue',
+        xhr: request.xhr,
+        toRefresh: true
+      }
     })
   }
   next(err)
@@ -138,10 +133,12 @@ app.use((err, request, response, next) => {
 // 404 error. Must be the last !
 app.use((request, response, next) => {
   response.status(404).render('errors/404.ejs', {
-    title: 'Page inconnue',
     errors: '',
-    xhr: request.xhr,
-    toRefresh: true
+    meta: {
+      title: 'Page inconnue',
+      xhr: request.xhr,
+      toRefresh: true
+    }
   })
 })
 
