@@ -46,11 +46,11 @@ export default async () => {
     query: {
       content: response.body.content
     },
-    stack: false
+    stack: true
   })
 
   log({ [uri]: response })
-
+/*
   uri = resolve('/events/archive', response.body[0].id)
 
   response = await fetch(uri, {
@@ -61,4 +61,7 @@ export default async () => {
   })
 
   log({ [uri]: response })
+
+
+ */
 }

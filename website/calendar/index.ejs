@@ -64,8 +64,8 @@
                           <tr itemscope itemtype="http://schema.org/Event">
                               <th scope="row" itemprop="identifier"><%= event.id %></th>
                               <td itemprop="name"><%= event.content %></td>
-                              <td itemprop="startDate" content="<%= event.start.toISOString() %>"><%= event.start.toLocaleString() %></td>
-                              <td itemprop="endDate" content="<%= event.end.toISOString() %>"><%= event.end.toLocaleString() %></td>
+                              <td itemprop="startDate" content="<%= event.startDate.toISOString() %>"><%= event.startDate.toLocaleString() %></td>
+                              <td itemprop="endDate" content="<%= event.endDate.toISOString() %>"><%= event.endDate.toLocaleString() %></td>
                               <td>
                                   <a href="/calendar/edit/<%= event.id %>" class="btn btn-sm btn-success fawe " title="Editer l'évènement"></a>
                                   <a href="/calendar/del/<%= event.id %>" class="btn btn-sm btn-danger fawe " title="Supprimer l'évènement"></a>
