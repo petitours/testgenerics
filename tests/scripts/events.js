@@ -14,7 +14,8 @@ export default async () => {
       startDate: date.toW3CDatetime(new Date(), true),
       endDate: date.toW3CDatetime(date.addDays(new Date(), 1), true)
     },
-    method: 'post'
+    method: 'post',
+    stack: false
   })
 
   log({ [uri]: response })
@@ -27,7 +28,8 @@ export default async () => {
       startDate: date.toW3CDatetime(new Date(), true),
       endDate: date.toW3CDatetime(date.addDays(new Date(), 1), true)
     },
-    method: 'post'
+    method: 'post',
+    stack: false
   })
 
   log({ [uri]: response })
@@ -43,7 +45,8 @@ export default async () => {
   response = await fetch(uri, {
     query: {
       content: response.body.content
-    }
+    },
+    stack: false
   })
 
   log({ [uri]: response })
@@ -53,7 +56,8 @@ export default async () => {
   response = await fetch(uri, {
     query: {
       confirmation: '1'
-    }
+    },
+    stack: false
   })
 
   log({ [uri]: response })
