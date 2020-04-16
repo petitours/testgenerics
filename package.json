@@ -10,7 +10,10 @@
     "devBlabla": "webpack-cli --mode development --watch --display-modules",
     "dev": "webpack-cli -r esm --mode development --watch ",
     "stats": "webpack-cli --mode production --json > stats.json",
-    "knex": "knex --esm --knexfile knexfile.cjs --"
+    "test": "node ./tests/test.js",
+    "knex": "knex --esm --knexfile knexfile.cjs --",
+    "down": "npm run knex migrate:down --",
+    "latest": "npm run knex migrate:latest --"
   },
   "engines": {
     "node": "13.x"
@@ -19,7 +22,7 @@
   "license": "TImaginesPasCommeCEstCher",
   "dependencies": {
     "@lcf.vs/css-ui": "^3.0.7",
-    "@lcf.vs/generics": "^1.0.0-alpha-066",
+    "@lcf.vs/generics": "^1.0.0-alpha-067",
     "anticore": "^3.2.2",
     "anticore-contracts": "^1.0.12",
     "audit": "0.0.6",
@@ -33,7 +36,7 @@
     "faker": "^4.1.0",
     "flatpickr": "^4.6.3",
     "helmet": "^3.22.0",
-    "knex": "^0.20.14",
+    "knex": "^0.20.15",
     "knex-hooks": "0.0.8",
     "moment": "^2.24.0",
     "multer": "^1.4.2",
@@ -41,7 +44,6 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "sqlite3": "^4.1.1",
-    "sqlstring": "^2.3.1",
     "urijs": "^1.19.2",
     "vis-data": "^6.5.1",
     "vis-timeline": "^7.3.4",

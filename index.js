@@ -91,7 +91,7 @@ app.get('/simuerreur', attempt(GETsimuErrorHooks)) */
 app.use((err, request, response, next) => {
   console.log(err)
   if (err.code === 400) {
-    //Object.values(err.errors).forEach(error => console.log(error))
+    // Object.values(err.errors).forEach(error => console.log(error))
     return response.status(400).render('errors/400.ejs', {
       errors: '',
       meta: {
