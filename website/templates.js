@@ -3,9 +3,9 @@ export default {
   index: {
     display: 'index.ejs'
   },
-  calendar: {
-    find: 'event.ejs'
-    searchGeneric:  './calendar/index.ejs '
+  events: {
+    find: 'event.ejs',
+    search: './calendar/index.ejs'
     // update : ????.ejs
   }
 }

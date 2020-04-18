@@ -1,4 +1,4 @@
-  <%- include('../../partials/header.ejs') %>
+  <%- include('../partials/header.ejs') %>
 
     <main class="calendar">
       <nav aria-label="breadcrumb">
@@ -16,20 +16,6 @@
           <button>Submit</button>
         </form-->
 
-        <!--div class="btn-toolbar" role="toolbar" aria-label="Manipulation du timeline">
-          <div class="btn-group mr-2" role="group" aria-label="First group">
-            <a role="button" href="<%= hrefBtDay %>" class="<%= ClassBtDay %>" title="Echelle de temps sur 1 jour complet">Jour</a>
-            <a role="button" href="<%= hrefBtWeek %>" class="<%= ClassBtWeek %>" title="Echelle de temps sur 1 semaine complète">Semaine</a>
-            <a role="button" href="<%= hrefBtMonth %>" class="<%= ClassBtMonth %>" title="Echelle de temps sur 1 mois complet">Mois</a>
-            <a role="button" href="<%= hrefBtYear %>" class="<%= ClassBtYear %>" title="Echelle de temps sur 1 année complète">Année</a>
-          </div>
-          <div class="btn-group mr-2" role="group" aria-label="Second group">
-            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un écran vers le passé">⇐ 1</a>
-            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un demi écran vers le passé">← 0.5</a>
-            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Positionne le timeline sur maintenant">Maintenant</a>
-            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un demi écran vers le futur">0.5 →</a>
-            <a role="button" href="<%= hrefBtDay %>" class="btn btn-outline-secondary" title="Décalage d'un écran vers le futur">1 ⇒</a>
-          </div-->
           <div class="btn-group" role="group" aria-label="Third group">
             <a role="button" href="/calendar/add" class="btn btn-outline-secondary" title="Création d'un nouvel évènement">Créer</a>
           </div>
@@ -48,7 +34,7 @@
         <a href="/calendar?range=day&date=2019-08-24" >calendar?range=day&date=2019-08-24</a></br>
 
         <div class="table-wrapper">
-          <% if (events.length > 0) {%>
+          <% if (body.length > 0) {%>
               <table class="table table-hovered">
                   <thead class="thead-dark">
                       <tr>
@@ -60,7 +46,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <% events.forEach((event, index) => { %>
+                      <% body.forEach((event, index) => { %>
                           <tr itemscope itemtype="http://schema.org/Event">
                               <th scope="row" itemprop="identifier"><%= event.id %></th>
                               <td itemprop="name"><%= event.content %></td>
@@ -82,7 +68,5 @@
     </main>
 
 
-    <!--script> var dataForTimeline2 = <%- dataForTimeline  %> ; </script-->
 
-
-<%- include('../../partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

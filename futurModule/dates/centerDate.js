@@ -3,13 +3,13 @@
 
 import * as baseDate from './base.js'
 
-// calcul de la date de début et de fin d'une range de date
+// calcul de la date de début et de fin d'une range de date à partir d'une date centrel et d'une fenetre en nombre de jours
 export function twoDateFromCenter (centerDate, range) {
   const p = Number(range) // conversion en nombre de la range si jamais elle arrive en texte
   const start = baseDate.addDays(centerDate, -(Math.floor(p / 2)))
   const end = baseDate.addDays(start, p)
 
-  return { start: start, end: end }
+  return { start, end }
 }
 
 // calcul la date centrale d'une range de date
