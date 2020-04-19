@@ -116,7 +116,7 @@ app.use((err, request, response, next) => {
 
 // Error 500 if any other error
 app.use((err, request, response, next) => {
-  if (err) {
+  if (err && ![400, 404, 422].includes(err.code))  {
     console.log(err)
     return response.status(500).render('errors/500.ejs', {
       errors: '',
@@ -127,7 +127,7 @@ app.use((err, request, response, next) => {
       }
     })
   }
-  next(err)
+  next()
 })
 
 // 404 error. Must be the last !
