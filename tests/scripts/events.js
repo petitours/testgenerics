@@ -42,7 +42,7 @@ export default async () => {
   log({ [uri]: response })
   */
 
-  uri = resolve('/calendar/wek/2020-04-20')
+  uri = resolve('/calendar/10/2020-04-17')
 
   response = await fetch(uri, {
    /* query: {
