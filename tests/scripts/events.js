@@ -6,7 +6,7 @@ import date from '@lcf.vs/generics/lib/types/date/date.js'
 export default async () => {
   let response, uri
 
-  /*
+
   uri = resolve('/events/create')
 
   response = await fetch(uri, {
@@ -20,7 +20,7 @@ export default async () => {
   })
 
   log({ [uri]: response })
-
+/*
   uri = resolve('/events/update', response.body.id)
 
   response = await fetch(uri, {
@@ -41,17 +41,18 @@ export default async () => {
 
   log({ [uri]: response })
   */
-
+/*
   uri = resolve('/calendar/10/2020-04-17')
 
   response = await fetch(uri, {
-   /* query: {
+    query: {
       //content: response.body.content
-    },*/
+    },
     stack: false
   })
 
   log({ [uri]: response })
+*/
 /*
   uri = resolve('/events/archive', response.body[0].id)
 
