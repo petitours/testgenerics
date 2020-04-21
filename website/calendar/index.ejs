@@ -59,7 +59,7 @@
                               <td itemprop="endDate" content="<%= event.endDate.toISOString() %>"><%= event.endDate.toLocaleString() %></td>
                               <td>
                                   <a href="/calendar/edit/<%= event.id %>" class="btn btn-sm btn-success fawe " title="Editer l'évènement"></a>
-                                  <a href="/calendar/del/<%= event.id %>" class="btn btn-sm btn-danger fawe " title="Supprimer l'évènement"></a>
+                                  <a href="/events/archive/<%= event.id %>" class="btn btn-sm btn-danger fawe " title="Supprimer l'évènement"></a>
                               </td>
                           </tr>
                       <% }) %>

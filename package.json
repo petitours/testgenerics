@@ -22,7 +22,7 @@
   "license": "TImaginesPasCommeCEstCher",
   "dependencies": {
     "@lcf.vs/css-ui": "^3.0.7",
-    "@lcf.vs/generics": "^1.0.0-alpha-081",
+    "@lcf.vs/generics": "^1.0.0-alpha-082",
     "anticore": "^3.2.2",
     "anticore-contracts": "^1.0.12",
     "audit": "0.0.6",
@@ -47,7 +47,7 @@
     "urijs": "^1.19.2",
     "vis-data": "^6.5.1",
     "vis-timeline": "^7.3.4",
-    "webpack": "^4.42.1"
+    "webpack": "^4.43.0"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",

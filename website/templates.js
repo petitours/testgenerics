@@ -6,7 +6,8 @@ export default {
   events: {
     find: 'event.ejs',
     search: './calendar/index.ejs',
-    create: './calendar/create.ejs'
-    // update : ????.ejs
+    create: './calendar/create.ejs',
+    archive: './calendar/archive.ejs',
+
   }
 }
