@@ -1,6 +1,6 @@
-import period_datetime from './period_datetime/period_datetime.js'
+import periodDatetime from './periodDatetime/periodDatetime.js'
 
 export default {
-  period_datetime
+  periodDatetime
 
 }
