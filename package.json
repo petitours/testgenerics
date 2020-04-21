@@ -22,7 +22,7 @@
   "license": "TImaginesPasCommeCEstCher",
   "dependencies": {
     "@lcf.vs/css-ui": "^3.0.7",
-    "@lcf.vs/generics": "^1.0.0-alpha-073",
+    "@lcf.vs/generics": "^1.0.0-alpha-079",
     "anticore": "^3.2.2",
     "anticore-contracts": "^1.0.12",
     "audit": "0.0.6",

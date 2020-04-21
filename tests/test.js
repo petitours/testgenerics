@@ -9,8 +9,8 @@ import index from './scripts/index.js'
 route({ app, dao })
 
 Promise.all([
- // index,
-  events
+  index//,
+ // events
 ].map(async test => test()))
   .catch(error => console.error(error))
   .finally(() => process.exit(0))
