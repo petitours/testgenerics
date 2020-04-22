@@ -22,7 +22,7 @@
   "license": "TImaginesPasCommeCEstCher",
   "dependencies": {
     "@lcf.vs/css-ui": "^3.0.7",
-    "@lcf.vs/generics": "^1.0.0-alpha-082",
+    "@lcf.vs/generics": "^1.0.0-alpha-088",
     "anticore": "^3.2.2",
     "anticore-contracts": "^1.0.12",
     "audit": "0.0.6",
@@ -37,7 +37,6 @@
     "flatpickr": "^4.6.3",
     "helmet": "^3.22.0",
     "knex": "^0.20.15",
-    "knex-hooks": "0.0.8",
     "moment": "^2.24.0",
     "multer": "^1.4.2",
     "mysql2": "^2.1.0",
