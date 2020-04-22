@@ -108,7 +108,7 @@ app.use((err, request, response, next) => {
 app.use((err, request, response, next) => {
   if (err.code === 422) {
     return response.render('errors/formRules.ejs', {
-      errors: err
+      errors: err.errors
     })
   }
   next(err)
@@ -116,7 +116,7 @@ app.use((err, request, response, next) => {
 
 // Error 500 if any other error
 app.use((err, request, response, next) => {
-  if (err && ![400, 404, 422].includes(err.code))  {
+  if (err && ![400, 404, 422].includes(err.code)) {
     console.log(err)
     return response.status(500).render('errors/500.ejs', {
       errors: '',

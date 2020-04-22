@@ -4,17 +4,17 @@
 
       <span class="Anticore-close-lb close-cursor cursor" >&times;</span>
       <div class="modal-lightbox-content lb_edit">
-          <h1>Édition évènement <%= event.id %></h1>
-            <% if (event) { %>
-                <form action="/calendar/edit/<%= event.id %>" enctype="multipart/form-data" method="post">
+          <h1>Édition évènement <%= body.id %></h1>
+            <% if (body) { %>
+                <form action="/events/update/<%= body.id %>" enctype="multipart/form-data" method="post">
                 <fieldset>
                     <div class="form-group">
                         <label for="content">Description de l'évènement</label>
-                        <input name="content" id="content" type="text" class="form-control"  minlength="3" maxlength="250" value="<%= event.content %>" required>
+                        <input name="content" id="content" type="text" class="form-control"  minlength="3" maxlength="250" value="<%= body.content %>" required>
                     </div>
                     <div class="form-group ">
-                        <label for="periode">Période</label>
-                        <input name="periode" id="periode" class="form-control dtpkrRange" type="text"  value="<%= event.start.toISOString()  %> au <%= event.end.toISOString() %>" required>
+                        <label for="period">Période</label>
+                        <input name="period" id="period" class="form-control dtpkrRange" type="text"  value="<%= body.startDate.toISOString()  %> au <%= body.endDate.toISOString() %>" required>
                     </div>
 
                 </fieldset>
